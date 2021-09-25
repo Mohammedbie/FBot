@@ -1,18 +1,6 @@
-QT += quick
 
-CONFIG += c++11
-
-# You can make your code fail to compile if it uses deprecated APIs.
-# In order to do so, uncomment the following line.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
-SOURCES += \
-        Logic/post.cpp \
-        Logic/publisher.cpp \
-        Logic/sharingtimeline.cpp \
-        Logic/user.cpp \
-        Logic/usercredentials.cpp \
-        main.cpp
+# You can choose either configTests for tests or configAPP for the application without tests.
+CONFIG += c++11 configTests
 
 RESOURCES += qml.qrc
 
@@ -27,8 +15,13 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    Logic/New Text Document.txt
+
+
+
+configAPP {
+TARGET = APP
+QT += quick
+DEFINES += PARAMA
 
 HEADERS += \
     Logic/medium.h \
@@ -38,3 +31,28 @@ HEADERS += \
     Logic/sharingtimelinetype.h \
     Logic/user.h \
     Logic/usercredentials.h
+
+SOURCES += \
+        Logic/post.cpp \
+        Logic/publisher.cpp \
+        Logic/sharingtimeline.cpp \
+        Logic/user.cpp \
+        Logic/usercredentials.cpp \
+        main.cpp
+}
+
+configTests {
+TARGET = Tests
+QT += core testlib
+DEFINES += PARAMB
+
+HEADERS += \
+        Logic/post.h \
+        Logic/user.h \
+        Tests/testuser.h
+
+SOURCES += \
+        Logic/post.cpp \
+        Logic/user.cpp \
+        Tests/testuser.cpp
+}

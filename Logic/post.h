@@ -10,6 +10,9 @@ class Post : public QObject
     Q_OBJECT
 public:
     explicit Post(QUuid id, QString userName, QString link);
+    Post(const Post& otherPost);
+
+    Post& operator=(const Post& otherPost);
 
     const QUuid& getId() const;
     const QString& getUserName() const;
